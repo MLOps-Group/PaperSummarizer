@@ -1,4 +1,4 @@
-# paper_summarizer
+# Paper Summarize - An MLOps project 
 
 A short description of the project.
 
