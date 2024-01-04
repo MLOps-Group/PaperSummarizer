@@ -1,6 +1,8 @@
 import torch
+from transformers import BartTokenizer, BartForConditionalGeneration
+from datasets import load_dataset
 
-class MyNeuralNet(torch.nn.Module):
+class ScientificPaperSummarizer:
     """ Basic neural network class. 
     
     Args:
@@ -8,10 +10,18 @@ class MyNeuralNet(torch.nn.Module):
         out_features: number of output features
     
     """
-    def __init__(self, in_features: int, out_features: int) -> None:
-        self.l1 = torch.nn.Linear(in_features, 500)
-        self.l2 = torch.nn.Linear(500, out_features)
-        self.r = torch.nn.ReLU()
+    def __init__(self, model_name="facebook/bart-large-cnn"):
+        # BartTokenizer loads tokenizer for specific Bart model
+        self.tokenizer = BartTokenizer.from_pretrained(model_name)
+        # Instantiate and load model weights for Bart model, allowing us to access configuration parameters (number of layers etc.)
+        self.model = BartForConditionalGeneration.from_pretrained(model_name)
+        self.dataset = load_dataset("scientific_papers")
+
+        # Converts input to format that can be pre-processed
+        self.tokenized_dataset = self.tokenize_dataset()
+        
+    def tokenizer():
+        
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass of the model.
