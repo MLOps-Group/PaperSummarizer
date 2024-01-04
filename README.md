@@ -1,6 +1,12 @@
 # Paper Summarize - An MLOps project 
 
-A short description of the project.
+The overall goal of this project is to create a tool which can assists researchers in creating abstracts for their papers.
+We aim to use some transformer model from the Hugging Face group and we do intent to include into our project. 
+
+## Initial Data
+The data is also provided by Hugging Face and consists of scientific articles and their abstracts.
+
+Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc
 
 ## Project structure
 
