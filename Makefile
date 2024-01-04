@@ -5,6 +5,7 @@
 #################################################################################
 
 PROJECT_NAME = PaperSummarizer
+REPO_NAME = paper_summarizer
 PYTHON_VERSION = 3.10
 PYTHON_INTERPRETER = python
 
@@ -38,7 +39,7 @@ clean:
 
 ## Process raw data into processed data
 data: requirements
-	$(PYTHON_INTERPRETER) $(PROJECT_NAME)/data/make_dataset.py
+	$(PYTHON_INTERPRETER) $(REPO_NAME)/data/make_dataset.py
 
 #################################################################################
 # Documentation RULES                                                           #
