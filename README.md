@@ -3,12 +3,13 @@
 The overall goal of this project is to create a tool which can assist researchers in creating abstracts for their amazing papers.
 The deep learning framework we aim to use is Transformer models from the Hugging Face group and we do intent to include it into our project. 
 
-
-
 ## Initial Data
 The data is also provided by Hugging Face and consists of scientific articles and their abstracts.
 
-Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc
+Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc¨
+
+## Model
+We expect to use the pre-trained BART model facebook/bart-large-cnn from huggingface. It is pre-trained on CNN Daily mails, and we will fine-tune it on the scientific articles data. 
 
 ## Project structure
 
