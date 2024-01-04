@@ -1,7 +1,9 @@
 # Paper Summarize - An MLOps project 
 
-The overall goal of this project is to create a tool which can assists researchers in creating abstracts for their papers.
-We aim to use some transformer model from the Hugging Face group and we do intent to include into our project. 
+The overall goal of this project is to create a tool which can assist researchers in creating abstracts for their amazing papers.
+The deep learning framework we aim to use is Transformer models from the Hugging Face group and we do intent to include it into our project. 
+
+
 
 ## Initial Data
 The data is also provided by Hugging Face and consists of scientific articles and their abstracts.
