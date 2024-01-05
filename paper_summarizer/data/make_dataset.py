@@ -42,11 +42,11 @@ if __name__ == '__main__':
     test_articles, test_abstracts = preprocess(test_data)
 
     print("saving data...")
-    train_articles.save_to_disk("data/processed/train_articles")
-    train_abstracts.save_to_disk("data/processed/train_abstracts")
-    val_articles.save_to_disk("data/processed/val_articles")
-    val_abstracts.save_to_disk("data/processed/val_abstracts")
-    test_articles.save_to_disk("data/processed/test_articles")
-    test_abstracts.save_to_disk("data/processed/test_abstracts")
+    train_articles.save_to_disk("data/raw/train_articles")
+    train_abstracts.save_to_disk("data/raw/train_abstracts")
+    val_articles.save_to_disk("data/raw/val_articles")
+    val_abstracts.save_to_disk("data/raw/val_abstracts")
+    test_articles.save_to_disk("data/raw/test_articles")
+    test_abstracts.save_to_disk("data/raw/test_abstracts")
 
     
