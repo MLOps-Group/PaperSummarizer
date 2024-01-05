@@ -1,15 +1,24 @@
 import torch
 from torch.utils.data import DataLoader
 import hydra
+import wandb
+import omegaconf
 
-import logging
-log = logging.getLogger(__name__)
+# import logging
+# log = logging.getLogger(__name__)
 
 
-@hydra.main(config_name="config.yaml", config_path="../conf/")
+@hydra.main(config_name="config.yaml", config_path="../configs/")
 def main(cfg):
-    log.info("Batch size: " + str(cfg.hyperparameters.batch_size))
-    log.info("Learning Rate: " + str(cfg.hyperparameters.learning_rate))
+    cfg = cfg.experiments
+    
+    # setup wandb
+    wandb_config = omegaconf.OmegaConf.to_container(
+        cfg, resolve=True, throw_on_missing=True
+    )
+    wandb_run = wandb.init(entity=cfg.wandb.entity, project=cfg.wandb.project, config=wandb_config)
+
+
 
 
 #TRAIN_PATH = "data/processed/test.pt"
