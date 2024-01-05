@@ -19,9 +19,7 @@ class ScientificPaperSummarizer:
 
         # Converts input to format that can be pre-processed
         self.tokenized_dataset = self.tokenize_dataset()
-        
-    def tokenizer():
-        
+
     
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Forward pass of the model.
