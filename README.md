@@ -1,15 +1,17 @@
-# Paper Summarize - An MLOps project 
+# Paper Summarizer - An MLOps project 
 
-The overall goal of this project is to create a tool which can assist researchers in creating abstracts for their amazing papers.
-The deep learning framework we aim to use is Transformer models from the Hugging Face group and we do intent to include it into our project. 
+In the field of research, where the vast amount of scientific literature can be overwhelming, the necessity for efficient summarization tools is crucial.
+The overall goal of this project, the Paper Summarizer, is therefore to construct an MLOps workflow that can assist researchers in creating concise abstracts for their ground-breaking papers.
+
+The deep learning framework we aim to use is state-of-the-art Transformer models from the Hugging Face group. We intent to integrate it into our project by using their APIs. 
 
 ## Initial Data
-The data is also provided by Hugging Face and consists of scientific articles and their abstracts.
+We will be using the comprehensive dataset available from Hugging Face, which includes a variety of scientific articles and their corresponding abstracts. This dataset will serve as the foundation for training and fine-tuning our models, resulting in a specialized and robust tool that is tailored to the complexities of scientific language.
 
-Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc¨
+Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc
 
 ## Model
-We expect to use the pre-trained BART model facebook/bart-large-cnn from huggingface. It is pre-trained on CNN Daily mails, and we will fine-tune it on the scientific articles data. 
+Our model of choice for the Paper Summarizer is the pre-trained BART model - facebook/bart-large-cnn from Hugging Face. BART is a transformer encoder-encoder (seq2seq) model with a bidirectional (BERT-like) encoder and an autoregressive (GPT-like) decoder, and it has been shown to be particularly effective when fine-tuned for text generation. Originally it is fine-tuned on CNN-daily mails, and we plan to fine-tune it using the extensive scientific articles dataset provided, aligning our tool with the specific demands of research-oriented summarization.
 
 ## Project structure
 
