@@ -1,5 +1,4 @@
 # predict_model.py
-import torch
 from transformers import pipeline, BartForConditionalGeneration, BartTokenizer
 import pandas as pd
 

@@ -1,14 +1,9 @@
-import torch
-from torch.utils.data import DataLoader
 import hydra
 import wandb
 import omegaconf
 # import evaluate
 import numpy as np
 
-from transformers import get_scheduler
-from tqdm.auto import tqdm
-from torch.optim import AdamW
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
 import os
 from paper_summarizer.data.dataloader import PaperDataLoader

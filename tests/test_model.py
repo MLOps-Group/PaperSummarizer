@@ -1,5 +1,3 @@
-from transformers import pipeline, BartForConditionalGeneration, BartTokenizer
-import pandas as pd
 
 def test_model():
     texts = [
