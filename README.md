@@ -1,15 +1,17 @@
-# Paper Summarize - An MLOps project 
+# Paper Summarizer - An MLOps project 
 
-The overall goal of this project is to create a tool which can assist researchers in creating abstracts for their amazing papers.
-The deep learning framework we aim to use is Transformer models from the Hugging Face group and we do intent to include it into our project. 
+In the field of research, where the vast amount of scientific literature can be overwhelming, the necessity for efficient summarization tools is crucial. 
+The overall goal of this project, the Paper Summarizer, is therefore to construct an MLOps workflow that can assist researchers in creating concise abstracts for their ground-breaking papers.
 
-## Initial Data
-The data is also provided by Hugging Face and consists of scientific articles and their abstracts.
+The state-of-the-art framework for dealing with any natural language processing (NLP) application is the `transformers` library developed by the Hugging Face group. The library allows for easy integration of many different variations of the transformer architecture. The `transformers` library allows for models build in all of the 3 major deep learning frameworks introduced in the course (PyTorch, Tensorflow and JAX) and we will use the PyTorch version of our chosen model.
 
-Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc¨
+## Data
+We will be using the comprehensive dataset available from Hugging Face, which includes a variety of scientific articles and their corresponding abstracts. This dataset will serve as the foundation for training and fine-tuning our models, resulting in a specialized and robust tool that is tailored to the complexities of scientific language.
+
+Find the data here: https://huggingface.co/datasets/scientific_papers?fbclid=IwAR1H4fNbqyivbE1a_L_dkbbyfIxoADfi68M5SiEJUQrtxAAeNGN2P1wfDjc
 
 ## Model
-We expect to use the pre-trained BART model facebook/bart-large-cnn from huggingface. It is pre-trained on CNN Daily mails, and we will fine-tune it on the scientific articles data. 
+Our model of choice for the Paper Summarizer is the pre-trained BART model - [facebook/bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) from Hugging Face. BART is a transformer encoder-encoder (seq2seq) model with a bidirectional (BERT-like) encoder and an autoregressive (GPT-like) decoder.  By using the `transformers` library the training time can also be shortened significantly, as we will using a pretrained model, meaning the model has already learned to generate meaningful text. BART has been shown to be particularly effective when fine-tuned for text generation and we will fine-tune for the specific text generation task of text summarization. The BART version we will use has been fine-tuned on CNN Daily Mail and we plan to fine-tune it using the extensive scientific articles dataset provided, aligning our tool with the specific demands of research-oriented summarization.
 
 ## Project structure
 
