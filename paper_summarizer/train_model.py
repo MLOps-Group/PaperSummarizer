@@ -34,19 +34,19 @@ def compute_metrics(eval_pred):
 def train_model(model, training_args):
     
     # Create a DataCollatorForSeq2Seq instance
-    data_collator = DataCollatorForSeq2Seq(model.tokenizer, model=model)
+    data_collator = DataCollatorForSeq2Seq(model.tokenizer, model=model.model)
 
     # Create a DataLoader
-    train_dataloader = PaperDataLoader("train", batch_size=64, shuffle=True, data_path="../../data/processed/")
-    val_dataloader = PaperDataLoader("val", batch_size=64, shuffle=False, data_path="../../data/processed/")
+    train_dataloader = PaperDataLoader("train", batch_size=64, shuffle=True)
+    val_dataloader = PaperDataLoader("val", batch_size=64, shuffle=False)
     
     
     
     trainer = Seq2SeqTrainer(
-        model=model,
+        model=model.model,
         args=training_args,
-        train_dataset=train_dataloader,
-        eval_dataset=val_dataloader,
+        train_dataset=train_dataloader.dataset.select(range(10)),
+        eval_dataset=val_dataloader.dataset.select(range(10)),
         tokenizer=model.tokenizer,
         data_collator=data_collator,
         # compute_metrics=compute_metrics, #rouge evaluation metric
@@ -64,7 +64,7 @@ def main(cfg):
     wandb_config = omegaconf.OmegaConf.to_container(
         cfg, resolve=True, throw_on_missing=True
     )
-    wandb_run = wandb.init(entity=cfg.wandb.entity, project=cfg.wandb.project, config=wandb_config)
+    wandb_run = wandb.init(**cfg.wandb, config=wandb_config)
 
     # setup model    
     model = ScientificPaperSummarizer()
