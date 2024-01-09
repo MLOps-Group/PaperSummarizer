@@ -3,13 +3,16 @@ from torch.utils.data import DataLoader
 import hydra
 import wandb
 import omegaconf
-import evaluate
+# import evaluate
 import numpy as np
-from model import ScientificPaperSummarizer
+
 from transformers import get_scheduler
 from tqdm.auto import tqdm
 from torch.optim import AdamW
 from transformers import Seq2SeqTrainingArguments, Seq2SeqTrainer, DataCollatorForSeq2Seq
+import os
+from paper_summarizer.data.dataloader import PaperDataLoader
+from paper_summarizer.models.model import ScientificPaperSummarizer
 
 ## using https://huggingface.co/docs/transformers/tasks/summarization#train
 
@@ -28,39 +31,25 @@ def compute_metrics(eval_pred):
 
     return {k: round(v, 4) for k, v in result.items()}
 
-def train_model(train_data_pt, eval_data_pt, model, num_epochs=4):
+def train_model(model, training_args):
     
     # Create a DataCollatorForSeq2Seq instance
-    data_collator = DataCollatorForSeq2Seq(model.tokenizer, model=model)
+    data_collator = DataCollatorForSeq2Seq(model.tokenizer, model=model.model)
 
     # Create a DataLoader
-    train_dataloader = DataLoader(train_data_pt, batch_size=64, collate_fn=data_collator)
-    eval_dataloader = DataLoader(eval_data_pt, batch_size=64, collate_fn=data_collator)
+    train_dataloader = PaperDataLoader("train", batch_size=64, shuffle=True)
+    val_dataloader = PaperDataLoader("val", batch_size=64, shuffle=False)
     
-    # Training argument to contain hyperparameters
-    # default optimizer is Adam optimizer
-    training_args = Seq2SeqTrainingArguments(
-        output_dir="fine_tuned_summarizer",
-        evaluation_strategy="epoch",
-        learning_rate=2e-5,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
-        weight_decay=0.01,
-        save_total_limit=3,
-        num_train_epochs=num_epochs,
-        predict_with_generate=True,
-        fp16=True,
-        push_to_hub=True,
-        )
+    
     
     trainer = Seq2SeqTrainer(
-        model=model,
+        model=model.model,
         args=training_args,
-        train_dataset=train_dataloader,
-        eval_dataset=eval_dataloader,
+        train_dataset=train_dataloader.dataset.select(range(10)),
+        eval_dataset=val_dataloader.dataset.select(range(10)),
         tokenizer=model.tokenizer,
         data_collator=data_collator,
-        compute_metrics=compute_metrics, #rouge evaluation metric
+        # compute_metrics=compute_metrics, #rouge evaluation metric
         )
 
     trainer.train()
@@ -75,17 +64,19 @@ def main(cfg):
     wandb_config = omegaconf.OmegaConf.to_container(
         cfg, resolve=True, throw_on_missing=True
     )
-    wandb_run = wandb.init(entity=cfg.wandb.entity, project=cfg.wandb.project, config=wandb_config)
-    
-    
-    TRAIN_PATH = "data/processed/train_articles_tokens.pt"
-    TEST_PATH = "data/processed/val_articles_tokens.ptt"
+    wandb_run = wandb.init(**cfg.wandb, config=wandb_config)
 
-    train_data = torch.load(TRAIN_PATH)
-    eval_data = torch.load(TEST_PATH)
-    
+    # setup model    
     model = ScientificPaperSummarizer()
-    train_model(train_data, eval_data, model)
+    
+    # Training argument to contain hyperparameters
+    # default optimizer is Adam optimizer
+    # setup training args
+    os.makedirs(wandb_run.config.train_args["output_dir"], exist_ok=True)
+    training_args = Seq2SeqTrainingArguments(**wandb_run.config.train_args)
+    
+    # train model
+    train_model(model, training_args)
     
 
 #trainloader = DataLoader(train_data, batch_size=64, shuffle=True)
