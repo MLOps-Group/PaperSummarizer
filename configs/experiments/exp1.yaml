@@ -13,4 +13,13 @@ train_args:
 wandb:
   project: "paper_summarizer"
   entity: "mlops_papersummarizer"
+  mode: disabled
   tags: ["exp1"]
+
+data:
+  train_articles: "data/train_articles_tokens.pt"
+  train_abstracts: "data/train_abstracts_tokens.pt"
+  val_articles: "data/val_articles_tokens.pt"
+  val_abstracts: "data/val_abstracts_tokens.pt"
+  test_articles: "data/test_articles_tokens.pt"
+  test_abstracts: "data/test_abstracts_tokens.pt"
