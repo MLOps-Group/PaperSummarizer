@@ -1,6 +1,5 @@
 from datasets import load_dataset
 from transformers import BartTokenizer, logging
-from tqdm import tqdm
 from typing import List, Tuple
 
 logging.set_verbosity_error()
